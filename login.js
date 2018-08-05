@@ -129,7 +129,7 @@ const getOpenidAndToken = ({code, openid, token}) => {
                 return;
             }
             const data = Object.assign({flag: 'bd'}, code ? {code} : {swanid});
-            request({
+            swan.request({
                 url: config.setSessionApi,
                 method: 'POST',
                 data,
