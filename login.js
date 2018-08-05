@@ -291,7 +291,7 @@ const getAuthPromise = ({openid, token, isLogin}) => {
  *      option.modal 非必需，swan.login是fail状态的弹窗swan.showModal各种配置
  *      option.modal.title 非必需，swan.login是fail状态时候的弹窗，swan.showModal的配置
  *      option.modal.cancelText 非必需，swan.login是fail状态时候的弹窗，swan.showModal的配置
- *      option.modal.showCancel 非必需，swan.login是fail状态时候的弹窗，swan.showModal的配置
+ *      option.modal.showCancel 非必需，swan.login是fail状态时候的弹窗是否展「取消授权」按钮
  *      option.modal.cancelColor 非必需，swan.login是fail状态时候的弹窗，swan.showModal的配置
  *      option.modal.confirmColor 非必需，swan.login是fail状态时候的弹窗，swan.showModal的配置
  *      option.modal.confirmText 非必需，swan.login是fail状态时候的弹窗，swan.showModal的配置
@@ -299,7 +299,7 @@ const getAuthPromise = ({openid, token, isLogin}) => {
  *      option.user.authSettingScope 非必需，用户授权的类型，默认值：scope.userInfo
  *      option.user.defaultUserName 非必需，默认用户名，默认值：神秘用户
  *      option.user.defaultUserAvatar 非必需，默认用户名头像
- * @return {Promise} 返回Promise对象，方便使用.then(data => {doSomething(data)})
+ * @return {Promise} 返回Promise对象，方便使用.then(data => {doSomething(data)})，data中包含用户唯一标识及用户授权所得数据
  * */
 export default option => {
     if(!option.setSessionApi) {
