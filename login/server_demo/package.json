@@ -5,7 +5,8 @@
   "main": "getSessionKeyByCodeApi.js",
   "private": true,
   "scripts": {
-    "start": "npm i & node ./getSessionKeyByCodeApi"
+    "prestart": "npm install",
+    "start": "node ./getSessionKeyByCodeApi"
   },
   "author": "",
   "license": "ISC",
