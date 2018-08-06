@@ -1,0 +1,19 @@
+{
+  "name": "server_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "getSessionKeyByCodeApi.js",
+  "private": true,
+  "scripts": {
+    "start": "npm i & node ./getSessionKeyByCodeApi"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa2": "^2.0.0-alpha.7",
+    "koa2-request": "^1.0.4",
+    "md5": "^2.2.1"
+  }
+}
