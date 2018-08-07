@@ -1,6 +1,7 @@
 /**
  * @file 针对百度小程序，基于swan core的webSocket封装
- * @usage 相关api参考了 `socket.io-client`的写法
+ * 
+ * 相关api参考了 `socket.io-client`的写法
  * import io from './swan-websocket';
  * const socket = io('wss://domain');
  * socket.on('connect', function(){});
@@ -12,7 +13,7 @@
  * });
  *
  * @author jinzhan
- * @email steinitz@qq.com
+ * @mail steinitz@qq.com
  ***/
 
 /* global swan */
@@ -43,6 +44,7 @@ const PING_INTERVAL = 2000;
 const noop = () => false;
 
 class SwanSocketIO {
+
     /**
      * 构造函数
      *
@@ -51,7 +53,7 @@ class SwanSocketIO {
      * @param {Function} option.success  成功的回调
      * @param {Function} option.fail  fail的回调
      * @param {Object} option.params 额外的参数
-     * @param {Number} option.pingInterval ping的时间间隔
+     * @param {number} option.pingInterval ping的时间间隔
      * */
     constructor(url, option = {}) {
         this.events = this.events || {};
@@ -92,7 +94,7 @@ class SwanSocketIO {
 
             this.socketTask = socketTask;
 
-            swan.onSocketOpen((response) => {
+            swan.onSocketOpen(response => {
                 this.isConnected = true;
                 this.trigger('connect');
                 resolve(response);
@@ -127,36 +129,34 @@ class SwanSocketIO {
         });
     }
 
-    trigger(type) {
-        let [handler, args] = [];
-
+    trigger(type, ...args) {
         if (!this.events) {
             this.events = {};
         }
 
         if (type === 'error') {
             if (!Array.isArray(this.events.error) || !this.events.error.length) {
-                if (arguments[1] instanceof Error) {
-                    throw arguments[1];
+                if (args[0] instanceof Error) {
+                    throw args[0];
                 } else {
                     throw TypeError('Uncaught, unspecified "error" event.');
                 }
             }
         }
 
-        handler = this.events[type];
+        const handler = this.events[type];
 
         switch (typeof handler) {
             case 'undefined':
                 return false;
 
             case 'function':
-                handler.apply(this, [].slice.call(arguments, 1, arguments.length));
+                handler.apply(this, args);
                 break;
 
             case 'object':
                 // array
-                Array.isArray(handler) && handler.slice(1, handler.length).forEach(item => {
+                Array.isArray(handler) && handler.forEach(item => {
                     item.apply(this, args);
                 });
                 break;
@@ -166,7 +166,7 @@ class SwanSocketIO {
 
     on(type, listener) {
         if (typeof listener !== 'function') {
-            throw TypeError('listener must be a function')
+            throw TypeError('listener must be a function');
         }
 
         if (!this.events) {
@@ -176,9 +176,9 @@ class SwanSocketIO {
         if (!this.events[type]) {
             this.events[type] = listener;
         } else if (Array.isArray(this.events[type])) {
-            this.events[type].push(listener)
+            this.events[type].push(listener);
         } else {
-            this.events[type] = [this.events[type], listener]
+            this.events[type] = [this.events[type], listener];
         }
         return this;
     }
@@ -245,7 +245,7 @@ class SwanSocketIO {
         const [type, ...params] = pack;
         this.trigger(type, ...params);
     }
-};
+}
 
 export default (url, option) => {
     return new SwanSocketIO(url, option);
