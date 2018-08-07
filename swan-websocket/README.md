@@ -4,8 +4,6 @@
 
 ## Usage
 
-### 方式1
-
 相关api参考了 `socket.io-client`的写法
 
 ```
