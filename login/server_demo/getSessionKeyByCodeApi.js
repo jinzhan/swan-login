@@ -1,3 +1,6 @@
+/**
+ * 一个简单的获取sessionKey的后端服务
+ * */
 const Koa = require('koa2');
 const request = require('koa2-request');
 const bodyParser = require('koa-bodyparser');
