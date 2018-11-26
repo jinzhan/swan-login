@@ -56,4 +56,4 @@ router.get('/get_openid', getOpenId)
 
 app.listen(3001);
 
-console.log('app listen 3001');
+console.log('app.listen 3001 ...');
